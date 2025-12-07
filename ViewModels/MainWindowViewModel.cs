@@ -14,12 +14,12 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        Title = new BindableReactiveProperty<string?>("Hello, Avalonia with MVVM!").AddTo(Disposable);
-
         GreetingViewModel =
             new GreetingViewModel(
                 Observable.Return<string?>("Hello, Avalonia with MVVM!")
             );
+
+        Title = new BindableReactiveProperty<string?>("Hello, Avalonia with MVVM!").AddTo(Disposable);
 
         GreetingContext.Text
             .Skip(1)

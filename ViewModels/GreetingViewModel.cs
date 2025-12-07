@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using HelloAvalonia.Adapters.Contexts;
 using HelloAvalonia.ViewModels.Contexts;
 using HelloAvalonia.ViewModels.Shared;
@@ -5,30 +6,20 @@ using R3;
 
 namespace HelloAvalonia.ViewModels;
 
-public class GreetingViewModel : ViewModelBase
+public partial class GreetingViewModel : ViewModelBase
 {
-    private GreetingContext? _context;
-    public GreetingContext? Context
-    {
-        get => _context;
-        private set
-        {
-            _context = value;
-            OnPropertyChanged();
-        }
-    }
-
+    [ObservableProperty] private GreetingContext? context;
     public IReadOnlyBindableReactiveProperty<string?> Greeting { get; }
-    public GreetingConsumerViewModel GreetingConsumerViewModel { get; } = new GreetingConsumerViewModel();
+    public GreetingConsumerViewModel GreetingConsumerViewModel { get; }
 
     public GreetingViewModel(Observable<string?> greeting)
     {
         Greeting = greeting.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
+        GreetingConsumerViewModel = new GreetingConsumerViewModel();
     }
 
-    public void AttachHosts(IContextViewHost viewHost)
+    public async Task AttachHostsAsync(IContextViewHost viewHost)
     {
-        var context = viewHost.ResolveContext<GreetingContext>();
-        Context = context?.Value;
+        (Context, _) = await viewHost.RequireContextAsync<GreetingContext>();
     }
 }

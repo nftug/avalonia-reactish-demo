@@ -1,4 +1,3 @@
-using Avalonia;
 using HelloAvalonia.ViewModels;
 using HelloAvalonia.Views.Shared;
 using HelloAvalonia.Views.ViewHosts;
@@ -14,14 +13,6 @@ public partial class GreetingConsumer : UserControlBase<GreetingConsumerViewMode
 
     protected override void OnViewModelSet(GreetingConsumerViewModel viewModel)
     {
-        // viewModel.AttachHosts(new ContextViewHost(this));
-    }
-
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
-    {
-        if (DataContext is GreetingConsumerViewModel viewModel)
-        {
-            viewModel.AttachHosts(new ContextViewHost(this));
-        }
+        _ = viewModel.AttachHostsAsync(new ContextViewHost(this));
     }
 }

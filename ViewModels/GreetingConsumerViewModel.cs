@@ -1,25 +1,25 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using HelloAvalonia.Adapters.Contexts;
 using HelloAvalonia.ViewModels.Contexts;
 using HelloAvalonia.ViewModels.Shared;
+using R3;
 
 namespace HelloAvalonia.ViewModels;
 
-public class GreetingConsumerViewModel : ViewModelBase
+public partial class GreetingConsumerViewModel : ViewModelBase
 {
-    private GreetingContext? _context;
-    public GreetingContext? Context
-    {
-        get => _context;
-        private set
-        {
-            _context = value;
-            OnPropertyChanged();
-        }
-    }
+    [ObservableProperty] private GreetingContext? context;
 
-    public void AttachHosts(IContextViewHost viewHost)
+    public async Task AttachHostsAsync(IContextViewHost viewHost)
     {
-        var context = viewHost.ResolveContext<GreetingContext>();
-        Context = context?.Value;
+        (Context, _) = await viewHost.RequireContextAsync<GreetingContext>();
+
+        Context.Text
+            .Skip(1)
+            .Subscribe(text =>
+            {
+                Console.WriteLine($"GreetingConsumerViewModel received text: {text}");
+            })
+            .AddTo(Disposable);
     }
 }

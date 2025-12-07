@@ -3,7 +3,7 @@ using R3;
 
 namespace HelloAvalonia.ViewModels.Contexts;
 
-public class GreetingContext : ViewModelBase
+public partial class GreetingContext : ContextBase
 {
     public BindableReactiveProperty<string?> Text { get; }
 

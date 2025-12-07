@@ -1,25 +1,18 @@
 using Avalonia;
 using Avalonia.Controls;
+using HelloAvalonia.ViewModels.Shared;
 
 namespace HelloAvalonia.Views.Shared;
 
 public abstract class UserControlBase<TViewModel> : UserControl
-    where TViewModel : class
+    where TViewModel : ViewModelBase
 {
-    private bool _isViewModelSet;
-
     private void EnsureViewModelSet()
     {
-        if (DataContext is TViewModel viewModel && !_isViewModelSet)
+        if (DataContext is TViewModel viewModel)
         {
             OnViewModelSet(viewModel);
-            _isViewModelSet = true;
         }
-    }
-
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
-    {
-        EnsureViewModelSet();
     }
 
     protected override void OnDataContextChanged(EventArgs e)

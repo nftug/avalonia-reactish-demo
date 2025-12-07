@@ -13,6 +13,6 @@ public partial class GreetingView : UserControlBase<GreetingViewModel>
 
     protected override void OnViewModelSet(GreetingViewModel viewModel)
     {
-        viewModel.AttachHosts(new ContextViewHost(this));
+        _ = viewModel.AttachHostsAsync(new ContextViewHost(this));
     }
 }
