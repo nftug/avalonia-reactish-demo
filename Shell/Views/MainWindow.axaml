@@ -8,12 +8,13 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HelloAvalonia.Shell.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Title="Hello Avalonia"
-        Width="800" Height="450"
+        Title="Hello Avalonia" Width="1024" Height="680"
         WindowStartupLocation="CenterScreen">
 
-    <framework:ContextProvider Context="{Binding CounterContext}">
-        <counter:CounterPage DataContext="{Binding CounterPageViewModel}"/>
+    <framework:ContextProvider Context="{Binding DialogService}">
+        <framework:ContextProvider Context="{Binding CounterContext}">
+            <counter:CounterPage DataContext="{Binding CounterPageViewModel}"/>
+        </framework:ContextProvider>
     </framework:ContextProvider>
 
 </Window>
