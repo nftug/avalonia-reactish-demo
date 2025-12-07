@@ -1,3 +1,4 @@
+using HelloAvalonia.ViewModels.Contexts;
 using HelloAvalonia.ViewModels.Shared;
 using R3;
 
@@ -9,6 +10,8 @@ public class MainWindowViewModel : ViewModelBase
 
     public GreetingViewModel GreetingViewModel { get; }
 
+    public GreetingContext GreetingContext { get; } = new GreetingContext();
+
     public MainWindowViewModel()
     {
         Title = new BindableReactiveProperty<string?>("Hello, Avalonia with MVVM!").AddTo(Disposable);
@@ -16,10 +19,9 @@ public class MainWindowViewModel : ViewModelBase
         GreetingViewModel =
             new GreetingViewModel(
                 Observable.Return<string?>("Hello, Avalonia with MVVM!")
-            )
-            .AddTo(Disposable);
+            );
 
-        GreetingViewModel.Text
+        GreetingContext.Text
             .Skip(1)
             .Subscribe(text => Title.Value = text)
             .AddTo(Disposable);

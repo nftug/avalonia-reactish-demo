@@ -3,27 +3,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:HelloAvalonia.ViewModels"
-             xmlns:local="using:HelloAvalonia.Views"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
-             x:Class="HelloAvalonia.Views.GreetingView"
-             x:DataType="vm:GreetingViewModel">
+             x:Class="HelloAvalonia.Views.GreetingConsumer"
+             x:DataType="vm:GreetingConsumerViewModel">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-        <TextBlock Text="Greeting Message:"
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <TextBlock Text="Text from GreetingContext:"
                    HorizontalAlignment="Center"
                    FontSize="18" />
 
-        <TextBlock Text="{Binding Greeting.Value}"
+        <TextBlock Text="{Binding Context.Text.Value}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="24"/>
-
-        <TextBox Text="{Binding Context.Text.Value, Mode=TwoWay}"
-                 Width="250"
-                 HorizontalAlignment="Center"
-                 FontSize="18"/>
-
-        <local:GreetingConsumer DataContext="{Binding GreetingConsumerViewModel}"/>
     </StackPanel>
 
 </UserControl>

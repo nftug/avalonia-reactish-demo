@@ -1,11 +1,10 @@
 using HelloAvalonia.Adapters.Contexts;
 using HelloAvalonia.ViewModels.Contexts;
 using HelloAvalonia.ViewModels.Shared;
-using R3;
 
 namespace HelloAvalonia.ViewModels;
 
-public class GreetingViewModel : ViewModelBase
+public class GreetingConsumerViewModel : ViewModelBase
 {
     private GreetingContext? _context;
     public GreetingContext? Context
@@ -16,14 +15,6 @@ public class GreetingViewModel : ViewModelBase
             _context = value;
             OnPropertyChanged();
         }
-    }
-
-    public IReadOnlyBindableReactiveProperty<string?> Greeting { get; }
-    public GreetingConsumerViewModel GreetingConsumerViewModel { get; } = new GreetingConsumerViewModel();
-
-    public GreetingViewModel(Observable<string?> greeting)
-    {
-        Greeting = greeting.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
     }
 
     public void AttachHosts(IContextViewHost viewHost)
