@@ -1,7 +1,7 @@
-using HelloAvalonia.ViewModels.Shared;
+using HelloAvalonia.Framework.Contexts;
 using R3;
 
-namespace HelloAvalonia.ViewModels.Contexts;
+namespace HelloAvalonia.Features.Greeting.Contexts;
 
 public partial class GreetingContext : ContextBase
 {

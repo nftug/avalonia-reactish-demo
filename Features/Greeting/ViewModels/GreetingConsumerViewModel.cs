@@ -1,10 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using HelloAvalonia.Adapters.Contexts;
-using HelloAvalonia.ViewModels.Contexts;
-using HelloAvalonia.ViewModels.Shared;
+using HelloAvalonia.Features.Greeting.Contexts;
+using HelloAvalonia.Framework.Adapters.Contexts;
+using HelloAvalonia.Framework.ViewModels;
 using R3;
 
-namespace HelloAvalonia.ViewModels;
+namespace HelloAvalonia.Features.Greeting.ViewModels;
 
 public partial class GreetingConsumerViewModel : ViewModelBase
 {

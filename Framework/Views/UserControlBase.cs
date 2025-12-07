@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 
-namespace HelloAvalonia.Views.Shared;
+namespace HelloAvalonia.Framework.Views;
 
 public abstract class UserControlBase<TViewModel> : UserControl
     where TViewModel : class

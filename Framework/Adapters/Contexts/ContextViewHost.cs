@@ -1,8 +1,7 @@
 using Avalonia.Controls;
-using HelloAvalonia.Adapters.Contexts;
-using HelloAvalonia.Views.Common;
+using HelloAvalonia.Framework.Views;
 
-namespace HelloAvalonia.Views.ViewHosts;
+namespace HelloAvalonia.Framework.Adapters.Contexts;
 
 public class ContextViewHost(Control root) : IContextViewHost
 {

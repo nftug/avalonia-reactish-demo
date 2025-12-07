@@ -1,8 +1,9 @@
-using HelloAvalonia.ViewModels.Contexts;
-using HelloAvalonia.ViewModels.Shared;
+using HelloAvalonia.Features.Greeting.Contexts;
+using HelloAvalonia.Features.Greeting.ViewModels;
+using HelloAvalonia.Framework.ViewModels;
 using R3;
 
-namespace HelloAvalonia.ViewModels;
+namespace HelloAvalonia.Shell.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {

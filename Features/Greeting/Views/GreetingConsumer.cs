@@ -1,8 +1,8 @@
-using HelloAvalonia.ViewModels;
-using HelloAvalonia.Views.Shared;
-using HelloAvalonia.Views.ViewHosts;
+using HelloAvalonia.Features.Greeting.ViewModels;
+using HelloAvalonia.Framework.Adapters.Contexts;
+using HelloAvalonia.Framework.Views;
 
-namespace HelloAvalonia.Views;
+namespace HelloAvalonia.Features.Greeting.Views;
 
 public partial class GreetingConsumer : UserControlBase<GreetingConsumerViewModel>
 {

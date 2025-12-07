@@ -1,4 +1,4 @@
-namespace HelloAvalonia.Adapters.Contexts;
+namespace HelloAvalonia.Framework.Adapters.Contexts;
 
 public interface IContextViewHost
 {

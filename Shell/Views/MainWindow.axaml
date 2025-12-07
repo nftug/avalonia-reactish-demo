@@ -2,16 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:view="using:HelloAvalonia.Views"
-        xmlns:view-common="using:HelloAvalonia.Views.Common"
-        xmlns:vm="using:HelloAvalonia.ViewModels"
+        xmlns:framework="using:HelloAvalonia.Framework.Views"
+        xmlns:greeting="using:HelloAvalonia.Features.Greeting.Views"
+        xmlns:vm="using:HelloAvalonia.Shell.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="HelloAvalonia.MainWindow"
+        x:Class="HelloAvalonia.Shell.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="{Binding Title.Value}">
 
-    <view-common:ContextProvider Context="{Binding GreetingContext}">
-        <view:GreetingView DataContext="{Binding GreetingViewModel}"/>
-    </view-common:ContextProvider>
+    <framework:ContextProvider Context="{Binding GreetingContext}">
+        <greeting:GreetingView DataContext="{Binding GreetingViewModel}"/>
+    </framework:ContextProvider>
 
 </Window>

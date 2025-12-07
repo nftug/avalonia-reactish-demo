@@ -1,8 +1,9 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using R3;
 
-namespace HelloAvalonia.ViewModels.Shared;
+namespace HelloAvalonia.Framework.ViewModels;
 
-public abstract class ContextBase : IDisposable
+public abstract class ViewModelBase : ObservableObject, IDisposable
 {
     protected CompositeDisposable Disposable { get; } = new();
 

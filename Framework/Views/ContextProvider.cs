@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.VisualTree;
-using HelloAvalonia.Adapters.Contexts;
+using HelloAvalonia.Framework.Adapters.Contexts;
 using R3;
 
-namespace HelloAvalonia.Views.Common;
+namespace HelloAvalonia.Framework.Views;
 
 public class ContextProvider : ContentControl
 {
