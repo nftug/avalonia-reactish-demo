@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Threading;
 using HelloAvalonia.Framework.Adapters.Contexts;
 using HelloAvalonia.Framework.ViewModels;
 
@@ -9,21 +8,41 @@ namespace HelloAvalonia.Framework.Views;
 public abstract class UserControlBase<TViewModel> : UserControl
     where TViewModel : ViewModelBase
 {
+    private bool _isAttached;
+    private TViewModel? _viewModel;
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        _isAttached = true;
+        TryAttach();
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        _isAttached = false;
+        _viewModel = null;
+        (DataContext as IDisposable)?.Dispose();
+    }
+
     protected override void OnDataContextChanged(EventArgs e)
     {
-        if (DataContext is TViewModel viewModel)
+        base.OnDataContextChanged(e);
+        _viewModel = DataContext as TViewModel;
+        TryAttach();
+    }
+
+    private void TryAttach()
+    {
+        if (_isAttached && _viewModel is not null)
         {
-            Dispatcher.UIThread.Post(() => OnViewModelSet(viewModel), DispatcherPriority.Loaded);
+            OnViewModelSet(_viewModel);
         }
     }
 
     protected virtual void OnViewModelSet(TViewModel viewModel)
     {
         viewModel.AttachViewHosts(new ViewHost(this));
-    }
-
-    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
-    {
-        (DataContext as IDisposable)?.Dispose();
     }
 }
