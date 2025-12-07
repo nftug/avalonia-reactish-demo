@@ -13,7 +13,7 @@ public abstract class UserControlBase<TViewModel> : UserControl
     {
         if (DataContext is TViewModel viewModel)
         {
-            Dispatcher.UIThread.Post(() => OnViewModelSet(viewModel));
+            Dispatcher.UIThread.Post(() => OnViewModelSet(viewModel), DispatcherPriority.Loaded);
         }
     }
 

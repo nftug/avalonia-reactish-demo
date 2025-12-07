@@ -13,7 +13,7 @@
 
     <framework:ContextProvider Context="{Binding DialogService}">
         <framework:ContextProvider Context="{Binding CounterContext}">
-            <counter:CounterPage DataContext="{Binding CounterPageViewModel}"/>
+            <counter:CounterPage/>
         </framework:ContextProvider>
     </framework:ContextProvider>
 

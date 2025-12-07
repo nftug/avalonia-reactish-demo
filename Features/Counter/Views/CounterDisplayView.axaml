@@ -6,7 +6,12 @@
              xmlns:local="using:HelloAvalonia.Features.Counter.Views"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
              x:Class="HelloAvalonia.Features.Counter.Views.CounterDisplayView"
-             x:DataType="vm:CounterDisplayViewModel">
+             x:DataType="vm:CounterDisplayViewModel"
+             DataContext="vm:CounterDisplayViewModel">
+
+    <UserControl.DataContext>
+        <vm:CounterDisplayViewModel/>
+    </UserControl.DataContext>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" Margin="0,0,0,20">
         <TextBlock Text="{Binding Count.Value, StringFormat='Current Count: {0}'}"

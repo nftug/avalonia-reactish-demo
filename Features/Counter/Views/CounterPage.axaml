@@ -5,12 +5,11 @@
              xmlns:vm="using:HelloAvalonia.Features.Counter.ViewModels"
              xmlns:local="using:HelloAvalonia.Features.Counter.Views"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
-             x:Class="HelloAvalonia.Features.Counter.Views.CounterPage"
-             x:DataType="vm:CounterPageViewModel">
+             x:Class="HelloAvalonia.Features.Counter.Views.CounterPage">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-        <local:CounterDisplayView DataContext="{Binding CounterDisplayViewModel}"/>
-        <local:CounterActionView DataContext="{Binding CounterActionViewModel}"/>
+        <local:CounterDisplayView/>
+        <local:CounterActionView/>
     </StackPanel>
 
 </UserControl>
