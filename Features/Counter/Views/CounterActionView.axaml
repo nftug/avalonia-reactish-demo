@@ -10,6 +10,14 @@
              x:Class="HelloAvalonia.Features.Counter.Views.CounterActionView"
              x:DataType="vm:CounterActionViewModel">
 
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="MinWidth" Value="150"/>
+        </Style>
+    </UserControl.Styles>
+
     <UserControl.DataContext>
         <vm:CounterActionViewModel/>
     </UserControl.DataContext>
@@ -24,7 +32,7 @@
             </Button>
         </StackPanel>
 
-        <Button Command="{Binding ResetCommand}" HorizontalAlignment="Stretch">
+        <Button Command="{Binding ResetCommand}">
             <controls:SymbolIconLabel Symbol="Refresh" Label="Reset"/>
         </Button>
     </StackPanel>

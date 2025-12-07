@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
              x:Class="HelloAvalonia.Features.Counter.Views.CounterPage">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="40">
         <local:CounterDisplayView/>
         <local:CounterActionView/>
     </StackPanel>
