@@ -1,0 +1,17 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa="using:FluentAvalonia.UI.Controls"
+                    xmlns:controls="using:HelloAvalonia.UI.Controls">
+
+    <ControlTheme x:Key="{x:Type controls:SymbolIconLabel}" TargetType="controls:SymbolIconLabel">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="controls:SymbolIconLabel">
+                <StackPanel Orientation="Horizontal" Spacing="{TemplateBinding Spacing}">
+                    <fa:SymbolIcon Symbol="{TemplateBinding Symbol}" />
+                    <TextBlock Text="{TemplateBinding Label}" VerticalAlignment="Center" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>
