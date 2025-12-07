@@ -5,9 +5,9 @@ namespace HelloAvalonia.Framework.Adapters.Contexts;
 
 public class ViewHost(Control root) : IViewHost
 {
-    public ContextReturn<T> RequireContext<T>(string? name = null) where T : class
+    public T RequireContext<T>(string? name = null) where T : class
         => ContextProvider.Require<T>(root, name);
 
-    public ContextReturn<T>? ResolveContext<T>(string? name = null) where T : class
+    public T? ResolveContext<T>(string? name = null) where T : class
         => ContextProvider.Resolve<T>(root, name);
 }

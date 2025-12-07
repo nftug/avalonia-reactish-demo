@@ -7,7 +7,7 @@ namespace HelloAvalonia.Framework.ViewModels;
 
 public abstract class ViewModelBase : ObservableObject, IDisposable
 {
-    protected CompositeDisposable Disposable { get; } = new();
+    protected CompositeDisposable Disposable { get; } = [];
 
     public void Dispose()
     {

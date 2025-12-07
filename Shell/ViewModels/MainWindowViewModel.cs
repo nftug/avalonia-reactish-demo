@@ -6,7 +6,7 @@ namespace HelloAvalonia.Shell.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public CounterContext CounterContext { get; } = new CounterContext();
+    public CounterContext CounterContext { get; } = new();
 
-    public CounterPageViewModel CounterPageViewModel { get; } = new CounterPageViewModel();
+    public CounterPageViewModel CounterPageViewModel { get; } = new();
 }

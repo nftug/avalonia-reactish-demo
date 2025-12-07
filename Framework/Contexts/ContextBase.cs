@@ -5,7 +5,7 @@ namespace HelloAvalonia.Framework.Contexts;
 
 public abstract class ContextBase : IDisposable
 {
-    protected CompositeDisposable Disposable { get; } = new();
+    protected CompositeDisposable Disposable { get; } = [];
 
     public void Dispose()
     {
@@ -18,4 +18,7 @@ public abstract class ContextBase : IDisposable
 
     public async Task InvokeAsync(Func<CancellationToken, Task> work)
         => await FrameworkUtils.InvokeAsync(Disposable, work);
+
+    public void AddToDisposable<T>(T disposable) where T : IDisposable
+        => Disposable.Add(disposable);
 }

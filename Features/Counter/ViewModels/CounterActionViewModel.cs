@@ -17,7 +17,7 @@ public partial class CounterActionViewModel : ViewModelBase
 
     public override void AttachViewHosts(IViewHost viewHost)
     {
-        (_context, _) = viewHost.RequireContext<CounterContext>();
+        _context = viewHost.RequireContext<CounterContext>();
 
         IsLoading = _context.IsLoading.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
 

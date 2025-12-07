@@ -15,7 +15,7 @@ public partial class CounterDisplayViewModel : ViewModelBase
 
     public override void AttachViewHosts(IViewHost viewHost)
     {
-        (_context, _) = viewHost.RequireContext<CounterContext>();
+        _context = viewHost.RequireContext<CounterContext>();
 
         Count = _context.Count.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
 
