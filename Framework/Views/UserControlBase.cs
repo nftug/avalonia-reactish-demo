@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using HelloAvalonia.Framework.Adapters.Contexts;
 using HelloAvalonia.Framework.ViewModels;
 using R3;
 
@@ -46,6 +45,5 @@ public abstract class UserControlBase<TViewModel> : UserControl
 
     protected virtual void OnViewModelSet(TViewModel viewModel)
     {
-        viewModel.AttachViewHost(new ViewHost(this));
     }
 }

@@ -1,35 +1,30 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using FluentAvalonia.UI.Controls;
-using HelloAvalonia.Framework.Adapters.Contexts;
 using HelloAvalonia.Framework.Contexts;
 using HelloAvalonia.Framework.ViewModels;
+using HelloAvalonia.UI.Navigation.Adapters;
 using R3;
 
 namespace HelloAvalonia.UI.Navigation.ViewModels;
 
-public partial class NavigationViewModel : ViewModelBase
+public class NavigationViewModel : ViewModelBase
 {
     private readonly ReactiveCommand<string> _navigateCommand;
 
-    [ObservableProperty] IReadOnlyBindableReactiveProperty<string>? pageTitle;
+    public IReadOnlyBindableReactiveProperty<string>? PageTitle { get; }
     public Observable<string> NavigateRequested => _navigateCommand;
     public BindableReactiveProperty<NavigationViewItem?> SelectedItem { get; }
 
-    public IEnumerable<NavigationViewItem> MenuItems { get; }
-    public IEnumerable<NavigationViewItem> FooterMenuItems { get; }
+    public IEnumerable<NavigationViewItem> MenuItems { get; private set; } = [];
+    public IEnumerable<NavigationViewItem> FooterMenuItems { get; private set; } = [];
 
-    public NavigationViewModel(
-        IEnumerable<NavigationViewItem> menuItems, IEnumerable<NavigationViewItem> footerMenuItems)
+    public NavigationPageFactory PageFactory { get; }
+
+    public NavigationViewModel(NavigationContext context, NavigationPageFactory pageFactory)
     {
-        MenuItems = menuItems;
-        FooterMenuItems = footerMenuItems;
         _navigateCommand = new ReactiveCommand<string>().AddTo(Disposable);
         SelectedItem = new BindableReactiveProperty<NavigationViewItem?>().AddTo(Disposable);
-    }
 
-    public override void AttachViewHost(IViewHost viewHost)
-    {
-        var context = viewHost.RequireContext<NavigationContext>();
+        PageFactory = pageFactory;
 
         PageTitle = context.CurrentPath
             .Select(path =>
@@ -67,6 +62,14 @@ public partial class NavigationViewModel : ViewModelBase
                 }
             })
             .AddTo(Disposable);
+    }
+
+    public void InitMenuItems(
+        IEnumerable<NavigationViewItem> menuItems,
+        IEnumerable<NavigationViewItem> footerMenuItems)
+    {
+        MenuItems = menuItems;
+        FooterMenuItems = footerMenuItems;
     }
 
     private NavigationViewItem? FindMenuItemByPath(string path)

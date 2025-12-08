@@ -1,20 +1,16 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using HelloAvalonia.Features.Counter.Contexts;
-using HelloAvalonia.Framework.Adapters.Contexts;
 using HelloAvalonia.Framework.ViewModels;
 using R3;
 
 namespace HelloAvalonia.Features.Counter.ViewModels;
 
-public partial class CounterDisplayViewModel : ViewModelBase
+public class CounterDisplayViewModel : ViewModelBase
 {
-    [ObservableProperty] private IReadOnlyBindableReactiveProperty<int>? count;
-    [ObservableProperty] private IReadOnlyBindableReactiveProperty<FizzBuzz>? fizzBuzzState;
+    public IReadOnlyBindableReactiveProperty<int> Count { get; }
+    public IReadOnlyBindableReactiveProperty<FizzBuzz> FizzBuzzState { get; }
 
-    public override void AttachViewHost(IViewHost viewHost)
+    public CounterDisplayViewModel(CounterContext context)
     {
-        var context = viewHost.RequireContext<CounterContext>();
-
         Count = context.Count.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
 
         FizzBuzzState = context.Count

@@ -4,7 +4,7 @@ using FluentAvalonia.UI.Controls;
 
 namespace HelloAvalonia.UI.Controls;
 
-public partial class SymbolIconLabel : TemplatedControl
+public class SymbolIconLabel : TemplatedControl
 {
     public static readonly StyledProperty<Symbol> SymbolProperty =
         AvaloniaProperty.Register<SymbolIconLabel, Symbol>(nameof(Symbol));

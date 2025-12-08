@@ -1,24 +1,19 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using HelloAvalonia.Features.Counter.Contexts;
-using HelloAvalonia.Framework.Adapters.Contexts;
 using HelloAvalonia.Framework.ViewModels;
 using HelloAvalonia.UI.Adapters;
 using R3;
 
 namespace HelloAvalonia.Features.Counter.ViewModels;
 
-public partial class CounterActionViewModel : ViewModelBase
+public class CounterActionViewModel : ViewModelBase
 {
-    [ObservableProperty] private IReadOnlyBindableReactiveProperty<bool>? isLoading;
-    [ObservableProperty] private ReactiveCommand? incrementCommand;
-    [ObservableProperty] private ReactiveCommand? decrementCommand;
-    [ObservableProperty] private ReactiveCommand? resetCommand;
+    public IReadOnlyBindableReactiveProperty<bool> IsLoading { get; }
+    public ReactiveCommand IncrementCommand { get; }
+    public ReactiveCommand DecrementCommand { get; }
+    public ReactiveCommand ResetCommand { get; }
 
-    public override void AttachViewHost(IViewHost viewHost)
+    public CounterActionViewModel(CounterContext context, IDialogService dialogService)
     {
-        var context = viewHost.RequireContext<CounterContext>();
-        var dialogService = viewHost.RequireContext<IDialogService>();
-
         IsLoading = context.IsLoading.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
 
         IncrementCommand = context.IsLoading

@@ -6,7 +6,7 @@
              x:Class="HelloAvalonia.Features.AboutPage.Views.AboutPage">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
         <TextBlock FontSize="36" TextAlignment="Center">
-            Hello Avalonia React-ish Demo
+            Avalonia React-ish MVVM Demo
         </TextBlock>
 
         <TextBlock FontSize="16" TextAlignment="Center" MaxWidth="500" TextWrapping="Wrap" LineSpacing="5">

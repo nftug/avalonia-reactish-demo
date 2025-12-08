@@ -8,15 +8,9 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HelloAvalonia.Shell.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Title="Hello Avalonia" Width="1024" Height="680"
+        Title="Avalonia React-ish MVVM Demo" Width="1024" Height="680"
         WindowStartupLocation="CenterScreen">
 
-    <fr:ContextProvider Context="{Binding DialogService}">
-        <fr:ContextProvider Context="{Binding NavigationContext}">
-            <fr:ContextProvider Context="{Binding CounterContext}">
-                <nav:NavigationView DataContext="{Binding NavigationViewModel}" />
-            </fr:ContextProvider>
-        </fr:ContextProvider>
-    </fr:ContextProvider>
+    <nav:NavigationView DataContext="{Binding NavigationViewModel}" />
 
 </Window>

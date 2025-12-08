@@ -1,45 +1,36 @@
 using FluentAvalonia.UI.Controls;
-using HelloAvalonia.Features.Counter.Contexts;
-using HelloAvalonia.Framework.Contexts;
+using HelloAvalonia.Framework.Adapters.Contexts;
 using HelloAvalonia.Framework.ViewModels;
-using HelloAvalonia.UI.Adapters;
 using HelloAvalonia.UI.Navigation.ViewModels;
-using HelloAvalonia.UI.Services;
 
 namespace HelloAvalonia.Shell.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public IDialogService DialogService { get; } = new DialogService();
+    public IServiceContainerInstance ContextProvider { get; }
 
-    public CounterContext CounterContext { get; } = new();
+    public NavigationViewModel NavigationViewModel { get; }
 
-    public NavigationContext NavigationContext { get; } =
-        new(
+    public MainWindowViewModel(IServiceContainerInstance container, NavigationViewModel navigationViewModel)
+    {
+        ContextProvider = container;
+        NavigationViewModel = navigationViewModel;
+
+        NavigationViewModel.InitMenuItems(
             [
-                "/counter",
-                "/about",
-            ],
-            initialPath: "/counter"
-        );
-
-    public NavigationViewModel NavigationViewModel { get; } =
-        new(
-            menuItems: [
-                new NavigationViewItem
-                {
-                    Content = "Counter",
-                    IconSource = new SymbolIconSource() { Symbol = Symbol.Add },
-                    Tag = "/counter",
+                new NavigationViewItem {
+                    Content = "Home",
+                    Tag = "/",
+                    IconSource = new SymbolIconSource { Symbol = Symbol.Home }
                 },
             ],
-            footerMenuItems: [
-                new NavigationViewItem
-                {
+            [
+                new NavigationViewItem {
                     Content = "About",
-                    IconSource = new SymbolIconSource() { Symbol = Symbol.Help },
                     Tag = "/about",
-                },
+                    IconSource = new SymbolIconSource { Symbol = Symbol.Help }
+                }
             ]
         );
+    }
 }

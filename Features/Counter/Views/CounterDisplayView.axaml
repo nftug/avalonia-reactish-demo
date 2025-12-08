@@ -7,10 +7,6 @@
              x:Class="HelloAvalonia.Features.Counter.Views.CounterDisplayView"
              x:DataType="vm:CounterDisplayViewModel">
 
-    <UserControl.DataContext>
-        <vm:CounterDisplayViewModel/>
-    </UserControl.DataContext>
-
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="25">
         <TextBlock Text="{Binding Count.Value, StringFormat='Current Count: {0}'}"
                    HorizontalAlignment="Center"

@@ -16,10 +16,6 @@
         </Style>
     </UserControl.Styles>
 
-    <UserControl.DataContext>
-        <vm:CounterActionViewModel/>
-    </UserControl.DataContext>
-
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
             <Button Command="{Binding IncrementCommand}">

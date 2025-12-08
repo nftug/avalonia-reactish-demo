@@ -4,22 +4,14 @@ namespace HelloAvalonia.Framework.Contexts;
 
 public class NavigationContext : ContextBase
 {
-    public IReadOnlyList<string> Paths { get; }
-    public ReadOnlyReactiveProperty<string> CurrentPath { get; }
-
     private readonly ReactiveProperty<string> _currentPath;
     private readonly List<Func<CancellationToken, Task<bool>>> _guards = [];
 
-    public NavigationContext(IEnumerable<string> paths, string initialPath)
+    public ReadOnlyReactiveProperty<string> CurrentPath => _currentPath;
+
+    public NavigationContext(string initialPath)
     {
-        Paths = paths.ToList().AsReadOnly();
-
         _currentPath = new ReactiveProperty<string>(initialPath).AddTo(Disposable);
-
-        CurrentPath = _currentPath
-            .Select(path => Paths.FirstOrDefault(p => p == path) ?? string.Empty)
-            .ToReadOnlyReactiveProperty(string.Empty)
-            .AddTo(Disposable);
     }
 
     public IDisposable RegisterGuard(Func<CancellationToken, Task<bool>> guard)
