@@ -1,8 +1,8 @@
-using HelloAvalonia.Framework.Views;
+using Avalonia.Controls;
 
 namespace HelloAvalonia.Features.Counter.Views;
 
-public partial class CounterPage : UserControlBase
+public partial class CounterPage : UserControl
 {
     public CounterPage()
     {

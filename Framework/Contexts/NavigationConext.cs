@@ -2,28 +2,23 @@ using R3;
 
 namespace HelloAvalonia.Framework.Contexts;
 
-public record Route(string Path, Type ViewModelType)
-{
-    public static Route Empty => new(string.Empty, typeof(object));
-}
-
 public class NavigationContext : ContextBase
 {
-    public IReadOnlyList<Route> Routes { get; }
-    public ReadOnlyReactiveProperty<Route> CurrentRoute { get; }
+    public IReadOnlyList<string> Paths { get; }
+    public ReadOnlyReactiveProperty<string> CurrentPath { get; }
 
     private readonly ReactiveProperty<string> _currentPath;
     private readonly List<Func<CancellationToken, Task<bool>>> _guards = [];
 
-    public NavigationContext(IEnumerable<Route> routes, string initialPath)
+    public NavigationContext(IEnumerable<string> paths, string initialPath)
     {
-        Routes = routes.ToList().AsReadOnly();
+        Paths = paths.ToList().AsReadOnly();
 
         _currentPath = new ReactiveProperty<string>(initialPath).AddTo(Disposable);
 
-        CurrentRoute = _currentPath
-            .Select(path => Routes.FirstOrDefault(route => route.Path == path) ?? Route.Empty)
-            .ToReadOnlyReactiveProperty(Route.Empty)
+        CurrentPath = _currentPath
+            .Select(path => Paths.FirstOrDefault(p => p == path) ?? string.Empty)
+            .ToReadOnlyReactiveProperty(string.Empty)
             .AddTo(Disposable);
     }
 

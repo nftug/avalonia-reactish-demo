@@ -1,6 +1,5 @@
 using FluentAvalonia.UI.Controls;
 using HelloAvalonia.Features.Counter.Contexts;
-using HelloAvalonia.Features.Counter.ViewModels;
 using HelloAvalonia.Framework.Contexts;
 using HelloAvalonia.Framework.ViewModels;
 using HelloAvalonia.UI.Adapters;
@@ -18,7 +17,8 @@ public class MainWindowViewModel : ViewModelBase
     public NavigationContext NavigationContext { get; } =
         new(
             [
-                new Route("/counter", typeof(CounterPageViewModel)),
+                "/counter",
+                "/about",
             ],
             initialPath: "/counter"
         );
@@ -33,6 +33,13 @@ public class MainWindowViewModel : ViewModelBase
                     Tag = "/counter",
                 },
             ],
-            footerMenuItems: []
+            footerMenuItems: [
+                new NavigationViewItem
+                {
+                    Content = "About",
+                    IconSource = new SymbolIconSource() { Symbol = Symbol.Help },
+                    Tag = "/about",
+                },
+            ]
         );
 }

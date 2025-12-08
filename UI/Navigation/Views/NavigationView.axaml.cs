@@ -1,11 +1,10 @@
-using HelloAvalonia.Framework.ViewModels;
 using HelloAvalonia.Framework.Views;
 using HelloAvalonia.UI.Navigation.ViewModels;
 using R3;
 
 namespace HelloAvalonia.UI.Navigation.Views;
 
-public partial class NavigationView : UserControlBase
+public partial class NavigationView : UserControlBase<NavigationViewModel>
 {
     public NavigationView()
     {
@@ -15,19 +14,16 @@ public partial class NavigationView : UserControlBase
         ContentFrame.IsVisible = false;
     }
 
-    protected override void OnViewModelSet(ViewModelBase viewModel)
+    protected override void OnViewModelSet(NavigationViewModel viewModel)
     {
         base.OnViewModelSet(viewModel);
 
-        if (viewModel is NavigationViewModel navigationViewModel)
-        {
-            navigationViewModel.NavigateRequested
-                .Subscribe(t =>
-                {
-                    ContentFrame.NavigateFromObject(t);
-                    ContentFrame.IsVisible = true;
-                })
-                .AddTo(Disposable);
-        }
+        viewModel.NavigateRequested
+            .Subscribe(t =>
+            {
+                ContentFrame.NavigateFromObject(t);
+                ContentFrame.IsVisible = true;
+            })
+            .AddTo(Disposable);
     }
 }

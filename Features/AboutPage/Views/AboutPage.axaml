@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HelloAvalonia.Features.AboutPage.Views.AboutPage">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
+        <TextBlock FontSize="36" TextAlignment="Center">
+            Hello Avalonia React-ish Demo
+        </TextBlock>
+
+        <TextBlock FontSize="16" TextAlignment="Center" MaxWidth="500" TextWrapping="Wrap" LineSpacing="5">
+            This is a demo application built with Avalonia UI,
+            showcasing a React-like architecture using context provider and Rx.
+        </TextBlock>
+    </StackPanel>
+</UserControl>

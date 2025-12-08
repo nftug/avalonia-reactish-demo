@@ -2,15 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:HelloAvalonia.Features.Counter.ViewModels"
              xmlns:local="using:HelloAvalonia.Features.Counter.Views"
+             xmlns:vm="using:HelloAvalonia.Features.Counter.ViewModels"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
-             x:Class="HelloAvalonia.Features.Counter.Views.CounterPage"
-             x:DataType="vm:CounterPageViewModel">
-
-    <UserControl.DataContext>
-        <vm:CounterPageViewModel/>
-    </UserControl.DataContext>
+             x:Class="HelloAvalonia.Features.Counter.Views.CounterPage">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="40">
         <local:CounterDisplayView/>

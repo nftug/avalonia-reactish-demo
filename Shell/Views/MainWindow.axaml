@@ -2,9 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:framework="using:HelloAvalonia.Framework.Views"
+        xmlns:fr="using:HelloAvalonia.Framework.Views"
         xmlns:nav="using:HelloAvalonia.UI.Navigation.Views"
-        xmlns:counter="using:HelloAvalonia.Features.Counter.Views"
         xmlns:vm="using:HelloAvalonia.Shell.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HelloAvalonia.Shell.Views.MainWindow"
@@ -12,12 +11,12 @@
         Title="Hello Avalonia" Width="1024" Height="680"
         WindowStartupLocation="CenterScreen">
 
-    <framework:ContextProvider Context="{Binding DialogService}">
-        <framework:ContextProvider Context="{Binding NavigationContext}">
-            <framework:ContextProvider Context="{Binding CounterContext}">
+    <fr:ContextProvider Context="{Binding DialogService}">
+        <fr:ContextProvider Context="{Binding NavigationContext}">
+            <fr:ContextProvider Context="{Binding CounterContext}">
                 <nav:NavigationView DataContext="{Binding NavigationViewModel}" />
-            </framework:ContextProvider>
-        </framework:ContextProvider>
-    </framework:ContextProvider>
+            </fr:ContextProvider>
+        </fr:ContextProvider>
+    </fr:ContextProvider>
 
 </Window>

@@ -6,10 +6,11 @@ using R3;
 
 namespace HelloAvalonia.Framework.Views;
 
-public abstract class UserControlBase : UserControl
+public abstract class UserControlBase<TViewModel> : UserControl
+    where TViewModel : ViewModelBase
 {
     private bool _isAttached;
-    private ViewModelBase? _viewModel;
+    private TViewModel? _viewModel;
     protected CompositeDisposable Disposable { get; } = [];
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -31,7 +32,7 @@ public abstract class UserControlBase : UserControl
     protected override void OnDataContextChanged(EventArgs e)
     {
         base.OnDataContextChanged(e);
-        _viewModel = DataContext as ViewModelBase;
+        _viewModel = DataContext as TViewModel;
         TryAttach();
     }
 
@@ -43,7 +44,7 @@ public abstract class UserControlBase : UserControl
         }
     }
 
-    protected virtual void OnViewModelSet(ViewModelBase viewModel)
+    protected virtual void OnViewModelSet(TViewModel viewModel)
     {
         viewModel.AttachViewHost(new ViewHost(this));
     }
