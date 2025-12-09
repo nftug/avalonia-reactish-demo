@@ -11,12 +11,10 @@ public partial class NavigationView : UserControlBase<NavigationViewModel>
         InitializeComponent();
     }
 
-    protected override void OnViewModelSet(NavigationViewModel viewModel)
+    protected override void OnAfterRender(NavigationViewModel viewModel)
     {
-        base.OnViewModelSet(viewModel);
-
         viewModel.NavigateRequested
-            .Subscribe(t => ContentFrame.NavigateFromObject(t))
-            .AddTo(Disposable);
+             .Subscribe(t => ContentFrame.NavigateFromObject(t))
+             .AddTo(Disposable);
     }
 }

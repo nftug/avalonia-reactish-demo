@@ -38,12 +38,10 @@ public abstract class UserControlBase<TViewModel> : UserControl
     private void TryAttach()
     {
         if (_isAttached && _viewModel is not null)
-        {
-            OnViewModelSet(_viewModel);
-        }
+            OnAfterRender(_viewModel);
     }
 
-    protected virtual void OnViewModelSet(TViewModel viewModel)
+    protected virtual void OnAfterRender(TViewModel viewModel)
     {
     }
 }
