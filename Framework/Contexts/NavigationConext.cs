@@ -1,8 +1,9 @@
+using HelloAvalonia.Framework.Abstractions;
 using R3;
 
 namespace HelloAvalonia.Framework.Contexts;
 
-public class NavigationContext : ContextBase
+public class NavigationContext : DisposableBase
 {
     private readonly ReactiveProperty<string> _currentPath;
     private readonly List<Func<CancellationToken, Task<bool>>> _guards = [];

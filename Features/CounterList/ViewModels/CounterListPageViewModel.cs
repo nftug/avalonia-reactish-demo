@@ -1,12 +1,12 @@
 using FluentAvalonia.Core;
+using HelloAvalonia.Framework.Abstractions;
 using HelloAvalonia.Framework.Utils;
-using HelloAvalonia.Framework.ViewModels;
 using ObservableCollections;
 using R3;
 
 namespace HelloAvalonia.Features.CounterList.ViewModels;
 
-public class CounterListPageViewModel : ViewModelBase
+public class CounterListPageViewModel : DisposableBase
 {
     private readonly ObservableList<CounterListItem> _counters;
 

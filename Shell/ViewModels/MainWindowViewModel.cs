@@ -1,11 +1,11 @@
 using FluentAvalonia.UI.Controls;
+using HelloAvalonia.Framework.Abstractions;
 using HelloAvalonia.Framework.Adapters.Contexts;
-using HelloAvalonia.Framework.ViewModels;
 using HelloAvalonia.UI.Navigation.ViewModels;
 
 namespace HelloAvalonia.Shell.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : DisposableBase
 {
     public IServiceContainerInstance ContextProvider { get; }
 

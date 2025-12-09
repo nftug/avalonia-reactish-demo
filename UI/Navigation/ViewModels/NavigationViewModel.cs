@@ -1,12 +1,12 @@
 using FluentAvalonia.UI.Controls;
+using HelloAvalonia.Framework.Abstractions;
 using HelloAvalonia.Framework.Contexts;
-using HelloAvalonia.Framework.ViewModels;
 using HelloAvalonia.UI.Navigation.Adapters;
 using R3;
 
 namespace HelloAvalonia.UI.Navigation.ViewModels;
 
-public class NavigationViewModel : ViewModelBase
+public class NavigationViewModel : DisposableBase
 {
     private readonly NavigationContext _context;
     private readonly ReactiveCommand<string> _navigateCommand;

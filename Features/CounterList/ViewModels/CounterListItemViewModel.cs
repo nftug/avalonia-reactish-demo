@@ -1,4 +1,4 @@
-using HelloAvalonia.Framework.ViewModels;
+using HelloAvalonia.Framework.Abstractions;
 using R3;
 
 namespace HelloAvalonia.Features.CounterList.ViewModels;
@@ -8,7 +8,7 @@ public record CounterListItem(Guid Id, int Value)
     public static CounterListItem CreateNew(int value) => new(Guid.NewGuid(), value);
 }
 
-public class CounterListItemViewModel : ViewModelBase
+public class CounterListItemViewModel : DisposableBase
 {
     private readonly CounterListItem _model;
 

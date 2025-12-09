@@ -1,11 +1,11 @@
-using HelloAvalonia.Framework.ViewModels;
+using HelloAvalonia.Framework.Abstractions;
 
 namespace HelloAvalonia.Features.Counter.ViewModels;
 
 public class CounterPageViewModel(
     CounterDisplayViewModel displayViewModel,
     CounterActionViewModel actionViewModel
-) : ViewModelBase
+) : DisposableBase
 {
     public CounterDisplayViewModel DisplayViewModel { get; } = displayViewModel;
 

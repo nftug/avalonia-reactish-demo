@@ -1,12 +1,12 @@
 using Avalonia;
 using Avalonia.Controls;
-using HelloAvalonia.Framework.ViewModels;
+using HelloAvalonia.Framework.Abstractions;
 using R3;
 
 namespace HelloAvalonia.Framework.Views;
 
 public abstract class UserControlBase<TViewModel> : UserControl
-    where TViewModel : ViewModelBase
+    where TViewModel : DisposableBase
 {
     private bool _isAttached;
     private TViewModel? _viewModel;

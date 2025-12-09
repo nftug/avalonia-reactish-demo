@@ -1,11 +1,11 @@
 using HelloAvalonia.Features.Counter.Contexts;
-using HelloAvalonia.Framework.ViewModels;
+using HelloAvalonia.Framework.Abstractions;
 using HelloAvalonia.UI.Adapters;
 using R3;
 
 namespace HelloAvalonia.Features.Counter.ViewModels;
 
-public class CounterActionViewModel : ViewModelBase
+public class CounterActionViewModel : DisposableBase
 {
     public IReadOnlyBindableReactiveProperty<bool> IsLoading { get; }
     public ReactiveCommand IncrementCommand { get; }

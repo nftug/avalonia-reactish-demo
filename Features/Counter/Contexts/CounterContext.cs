@@ -1,9 +1,9 @@
-using HelloAvalonia.Framework.Contexts;
+using HelloAvalonia.Framework.Abstractions;
 using R3;
 
 namespace HelloAvalonia.Features.Counter.Contexts;
 
-public class CounterContext : ContextBase
+public class CounterContext : DisposableBase
 {
     private readonly ReactiveProperty<int> _count;
     private readonly ReactiveProperty<bool> _isLoading;

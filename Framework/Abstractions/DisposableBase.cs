@@ -1,17 +1,22 @@
 using HelloAvalonia.Framework.Utils;
 using R3;
 
-namespace HelloAvalonia.Framework.ViewModels;
+namespace HelloAvalonia.Framework.Abstractions;
 
-public abstract class ViewModelBase : IDisposable
+public abstract class DisposableBase : IDisposable
 {
+    private bool _disposed = false;
     protected CompositeDisposable Disposable { get; } = [];
 
     public void Dispose()
     {
-        Disposable.Dispose();
-        Dispose(true);
-        GC.SuppressFinalize(this);
+        if (!_disposed)
+        {
+            Disposable.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+            _disposed = true;
+        }
     }
 
     protected virtual void Dispose(bool disposing) { }
