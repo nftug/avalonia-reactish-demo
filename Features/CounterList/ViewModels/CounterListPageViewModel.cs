@@ -1,3 +1,5 @@
+using FluentAvalonia.Core;
+using HelloAvalonia.Framework.Utils;
 using HelloAvalonia.Framework.ViewModels;
 using ObservableCollections;
 using R3;
@@ -6,7 +8,7 @@ namespace HelloAvalonia.Features.CounterList.ViewModels;
 
 public class CounterListPageViewModel : ViewModelBase
 {
-    private readonly ObservableList<CounterListItemViewModel> _counters;
+    private readonly ObservableList<CounterListItem> _counters;
 
     public NotifyCollectionChangedSynchronizedViewList<CounterListItemViewModel> CountersView { get; }
     public IReadOnlyBindableReactiveProperty<int> CountersSum { get; }
@@ -15,22 +17,25 @@ public class CounterListPageViewModel : ViewModelBase
 
     public CounterListPageViewModel()
     {
-        _counters = [..
-            Enumerable.Range(0, 5).Select(i => new CounterListItemViewModel(Guid.NewGuid(), i, OnItemValueChanged))];
+        _counters = [.. Enumerable.Range(0, 5).Select(i => CounterListItem.CreateNew(i))];
 
-        CountersView = _counters.ToNotifyCollectionChangedSlim().AddTo(Disposable);
+        var countersView = _counters
+            .CreateViewModelView(
+                item => new CounterListItemViewModel(item, OnItemValueChanged),
+                Disposable
+            );
+
+        CountersView = countersView.ToNotifyCollectionChanged().AddTo(Disposable);
 
         CountersSum = _counters
-            .ObserveChanged()
-            .Select(_ => Unit.Default)
-            .Prepend(Unit.Default)
+            .ObserveChangedWithPrepend()
             .Select(_ => _counters.Sum(c => c.Value))
             .ToReadOnlyBindableReactiveProperty()
             .AddTo(Disposable);
 
         AddCommand = new ReactiveCommand().AddTo(Disposable);
         RemoveCommand = _counters
-            .ObserveCountChanged()
+            .ObserveCountChanged(notifyCurrentCount: true)
             .Select(count => count > 0)
             .ToReactiveCommand()
             .AddTo(Disposable);
@@ -42,24 +47,24 @@ public class CounterListPageViewModel : ViewModelBase
     private void HandleAddCounter()
     {
         var nextValue = _counters.Count > 0 ? _counters[^1].Value + 1 : 0;
-        _counters.Add(new(Guid.NewGuid(), nextValue, OnItemValueChanged));
+        _counters.Add(CounterListItem.CreateNew(nextValue));
     }
 
     private void HandleRemoveCounter()
     {
         if (_counters.Count > 0)
         {
-            _counters.RemoveAt(_counters.Count - 1);
+            var index = _counters.Count - 1;
+            _counters.RemoveAt(index);
         }
     }
 
-    private void OnItemValueChanged(Guid id, int newValue)
+    private void OnItemValueChanged(CounterListItem item)
     {
-        if (_counters.FirstOrDefault(c => c.Id == id) is { } target)
+        if (_counters.FirstOrDefault(c => c.Id == item.Id) is { } existingItem)
         {
-            target.Dispose();
-            var index = _counters.IndexOf(target);
-            _counters[index] = new CounterListItemViewModel(id, newValue, OnItemValueChanged);
+            var index = _counters.IndexOf(existingItem);
+            _counters[index] = item;
         }
     }
 }
