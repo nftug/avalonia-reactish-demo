@@ -53,29 +53,4 @@ public static class FrameworkUtils
             .Select(_ => Unit.Default)
             .Prepend(Unit.Default);
     }
-
-    public static ISynchronizedView<T, TViewModel> CreateViewModelView<T, TViewModel>(
-        this IObservableCollection<T> source,
-        Func<T, TViewModel> transform,
-        CompositeDisposable disposables)
-        where TViewModel : IDisposable
-    {
-        var view = source.CreateView(transform).AddTo(disposables);
-
-        view
-            .ObserveChanged()
-            .Subscribe(e =>
-            {
-                // Dispose the old view model when an item is removed or replaced
-                if (e.OldItem.View is null) return;
-                e.OldItem.View.Dispose();
-            })
-            .AddTo(disposables);
-
-        Disposable
-            .Create(() => view.ToList().ForEach(v => v.Dispose()))
-            .AddTo(disposables);
-
-        return view;
-    }
 }

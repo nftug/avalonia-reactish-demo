@@ -8,29 +8,28 @@ public class CounterListItemViewModel : DisposableBase
 {
     private readonly CounterListItem _model;
 
-    public Guid Id => _model.Id;
     public int Value => _model.Value;
     public ReactiveCommand IncrementCommand { get; }
     public ReactiveCommand DecrementCommand { get; }
 
-    public CounterListItemViewModel(CounterListItem model, Action<CounterListItem> onValueChanged)
+    public CounterListItemViewModel(CounterListItem model, Action<CounterListItem> updateModel)
     {
         _model = model;
 
         IncrementCommand = new ReactiveCommand().AddTo(Disposable);
-        DecrementCommand = new ReactiveCommand().AddTo(Disposable);
+        DecrementCommand = Observable.Return(Value > 0).ToReactiveCommand().AddTo(Disposable);
 
         IncrementCommand
-            .Subscribe(_ => onValueChanged(_model with { Value = Value + 1 }))
+            .Subscribe(_ => updateModel(_model with { Value = Value + 1 }))
             .AddTo(Disposable);
         DecrementCommand
-            .Subscribe(_ => onValueChanged(_model with { Value = Value - 1 }))
+            .Subscribe(_ => updateModel(_model with { Value = Value - 1 }))
             .AddTo(Disposable);
     }
 
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        Console.WriteLine($"CounterListItemViewModel Disposed: {Id}");
+        Console.WriteLine($"CounterListItemViewModel Disposed: {_model.Id}");
     }
 }

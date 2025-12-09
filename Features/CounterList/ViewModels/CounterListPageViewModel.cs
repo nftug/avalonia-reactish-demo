@@ -11,7 +11,7 @@ public class CounterListPageViewModel : DisposableBase
 {
     private readonly ObservableList<CounterListItem> _counters;
 
-    public NotifyCollectionChangedSynchronizedViewList<CounterListItemViewModel> CountersView { get; }
+    public DisposableViewListEnvelope<CounterListItem, CounterListItemViewModel> CountersViewEnvelope { get; }
     public IReadOnlyBindableReactiveProperty<int> CountersSum { get; }
     public ReactiveCommand AddCommand { get; }
     public ReactiveCommand RemoveCommand { get; }
@@ -20,12 +20,9 @@ public class CounterListPageViewModel : DisposableBase
     {
         _counters = [.. Enumerable.Range(0, 5).Select(CounterListItem.CreateNew)];
 
-        CountersView = _counters
-            .CreateViewModelView(
-                item => new CounterListItemViewModel(item, OnItemValueChanged),
-                Disposable
-            )
-            .ToNotifyCollectionChanged()
+        CountersViewEnvelope = _counters
+            .ToDisposableViewListEnvelope(
+                model => new CounterListItemViewModel(model, updated => _counters.Update(updated, model)))
             .AddTo(Disposable);
 
         CountersSum = _counters
@@ -57,15 +54,6 @@ public class CounterListPageViewModel : DisposableBase
         {
             var index = _counters.Count - 1;
             _counters.RemoveAt(index);
-        }
-    }
-
-    private void OnItemValueChanged(CounterListItem updatedItem)
-    {
-        if (_counters.FirstOrDefault(c => c.Id == updatedItem.Id) is { } existingItem)
-        {
-            var index = _counters.IndexOf(existingItem);
-            _counters[index] = updatedItem;
         }
     }
 }

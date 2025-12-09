@@ -29,7 +29,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       Margin="10">
-            <ItemsControl ItemsSource="{Binding CountersView}">
+            <ItemsControl ItemsSource="{Binding CountersViewEnvelope.View}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
