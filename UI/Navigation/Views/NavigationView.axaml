@@ -32,10 +32,12 @@
                        Margin="20.0"
                        DockPanel.Dock="Top" />
 
-            <fa:Frame x:Name="ContentFrame"
-                      IsNavigationStackEnabled="False"
-                      CacheSize="0"
-                      NavigationPageFactory="{Binding PageFactory}"/>
+            <Panel Margin="20">
+                <fa:Frame x:Name="ContentFrame"
+                        IsNavigationStackEnabled="False"
+                        CacheSize="0"
+                        NavigationPageFactory="{Binding PageFactory}"/>
+            </Panel>
         </DockPanel>
 
     </fa:NavigationView>

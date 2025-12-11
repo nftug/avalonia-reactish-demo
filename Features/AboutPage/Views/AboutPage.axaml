@@ -6,12 +6,16 @@
              x:Class="HelloAvalonia.Features.AboutPage.Views.AboutPage">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
         <TextBlock FontSize="36" TextAlignment="Center">
-            Avalonia React-ish MVVM Demo
+            Hello Avalonia UI!
         </TextBlock>
 
-        <TextBlock FontSize="16" TextAlignment="Center" MaxWidth="500" TextWrapping="Wrap" LineSpacing="5">
-            This is a demo application built with Avalonia UI,
-            showcasing a React-like architecture using context provider and Rx.
-        </TextBlock>
+        <StackPanel Spacing="15">
+            <TextBlock FontSize="16" TextAlignment="Center" TextWrapping="Wrap" LineSpacing="5">
+                This is a demo application built with Avalonia UI, showcasing a smart MVVM architecture.
+            </TextBlock>
+            <TextBlock FontSize="16" TextAlignment="Center" TextWrapping="Wrap" LineSpacing="5">
+                Powered by FluentAvalonia, R3, ObservableCollections, and Pure.DI.
+            </TextBlock>
+        </StackPanel>
     </StackPanel>
 </UserControl>
