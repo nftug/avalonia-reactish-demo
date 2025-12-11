@@ -3,7 +3,13 @@ using HelloAvalonia.Framework.Interfaces;
 
 namespace HelloAvalonia.Framework.Models;
 
-public abstract class NavigationPageStoreBase(ICompositionScopeFactory scopeFactory) : IDisposable
+public interface INavigationPageStore : IDisposable
+{
+    Control LoadPageFromNavigation(string path);
+}
+
+public abstract class NavigationPageStoreBase(ICompositionScopeFactory scopeFactory)
+    : IDisposable, INavigationPageStore
 {
     private ICompositionScope? _scope;
 

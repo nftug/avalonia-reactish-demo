@@ -20,7 +20,7 @@ internal static class AppDI
             .Bind().To<AppCompositionScopeFactory>()
             .Bind().As(Lifetime.Singleton).To<DialogService>()
             .Bind<NavigationContext>().As(Lifetime.Singleton).To(_ => new NavigationContext("/"))
-            .Bind().As(Lifetime.Singleton).To<AppNavigationPageStore>()
+            .Bind<INavigationPageStore>().As(Lifetime.Singleton).To<AppNavigationPageStore>()
             .RootBind<MainWindowViewModel>("MainWindow").To<MainWindowViewModel>()
 
             // Counter feature registrations
