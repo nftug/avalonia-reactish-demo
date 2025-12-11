@@ -5,7 +5,7 @@ namespace HelloAvalonia.Features.Counter.ViewModels;
 public class CounterPageViewModel(
     CounterDisplayViewModel displayViewModel,
     CounterActionViewModel actionViewModel
-) : DisposableBase
+) : BindableBase
 {
     public CounterDisplayViewModel DisplayViewModel { get; } = displayViewModel;
 

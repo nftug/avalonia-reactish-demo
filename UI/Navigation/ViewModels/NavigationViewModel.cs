@@ -6,7 +6,7 @@ using R3;
 
 namespace HelloAvalonia.UI.Navigation.ViewModels;
 
-public class NavigationViewModel : DisposableBase
+public class NavigationViewModel : BindableBase
 {
     private readonly NavigationContext _context;
     private readonly ReactiveCommand<string> _navigateCommand;

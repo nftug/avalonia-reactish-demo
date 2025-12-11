@@ -3,7 +3,7 @@ using R3;
 
 namespace HelloAvalonia.Framework.Models;
 
-public class NavigationContext : DisposableBase
+public class NavigationContext : BindableBase
 {
     private readonly ReactiveProperty<string> _currentPath;
     private readonly List<Func<CancellationToken, Task<bool>>> _guards = [];

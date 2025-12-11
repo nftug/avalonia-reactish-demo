@@ -3,7 +3,7 @@ using R3;
 
 namespace HelloAvalonia.Framework.Abstractions;
 
-public sealed class DisposableViewListEnvelope<T, TView> : IDisposable
+public sealed class BindableViewListEnvelope<T, TView> : IDisposable
     where TView : IDisposable
 {
     private readonly ISynchronizedView<T, TView> _synchronizedView;
@@ -11,7 +11,7 @@ public sealed class DisposableViewListEnvelope<T, TView> : IDisposable
 
     public INotifyCollectionChangedSynchronizedViewList<TView> View { get; }
 
-    public DisposableViewListEnvelope(ObservableList<T> source, Func<T, TView> transform)
+    public BindableViewListEnvelope(ObservableList<T> source, Func<T, TView> transform)
     {
         _synchronizedView = source.CreateView(transform).AddTo(_disposables);
 
@@ -37,14 +37,14 @@ public sealed class DisposableViewListEnvelope<T, TView> : IDisposable
     public void Dispose() => _disposables.Dispose();
 }
 
-public static class DisposableViewEnvelopeExtensions
+public static class BindableViewListEnvelopeExtensions
 {
-    public static DisposableViewListEnvelope<T, TView> ToDisposableViewListEnvelope<T, TView>(
+    public static BindableViewListEnvelope<T, TView> ToBindableViewListEnvelope<T, TView>(
         this ObservableList<T> source,
         Func<T, TView> transform)
         where TView : IDisposable
     {
-        return new DisposableViewListEnvelope<T, TView>(source, transform);
+        return new BindableViewListEnvelope<T, TView>(source, transform);
     }
 
     public static void Update<T>(this ObservableList<T> source, T updated, T origin)

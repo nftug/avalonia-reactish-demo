@@ -4,7 +4,7 @@ using R3;
 
 namespace HelloAvalonia.Features.Counter.ViewModels;
 
-public class CounterDisplayViewModel : DisposableBase
+public class CounterDisplayViewModel : BindableBase
 {
     public IReadOnlyBindableReactiveProperty<int> Count { get; }
     public IReadOnlyBindableReactiveProperty<FizzBuzz> FizzBuzzState { get; }

@@ -3,7 +3,7 @@ using R3;
 
 namespace HelloAvalonia.Features.Counter.Models;
 
-public class CounterModel : DisposableBase
+public class CounterModel : BindableBase
 {
     private readonly ReactiveProperty<int> _count;
     private readonly ReactiveProperty<bool> _isLoading;

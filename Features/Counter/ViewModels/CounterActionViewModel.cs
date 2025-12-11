@@ -6,7 +6,7 @@ using R3;
 
 namespace HelloAvalonia.Features.Counter.ViewModels;
 
-public class CounterActionViewModel : DisposableBase
+public class CounterActionViewModel : BindableBase
 {
     private readonly CounterModel _model;
 

@@ -6,11 +6,11 @@ using R3;
 
 namespace HelloAvalonia.Features.CounterList.ViewModels;
 
-public class CounterListPageViewModel : DisposableBase
+public class CounterListPageViewModel : BindableBase
 {
     private readonly CounterListModel _model;
 
-    public DisposableViewListEnvelope<CounterListItem, CounterListItemViewModel> CountersViewEnvelope { get; }
+    public BindableViewListEnvelope<CounterListItem, CounterListItemViewModel> CountersViewEnvelope { get; }
     public IReadOnlyBindableReactiveProperty<int> CountersSum { get; }
     public ReactiveCommand<Unit> AddCommand { get; }
     public ReactiveCommand<Unit> RemoveCommand { get; }
@@ -21,7 +21,7 @@ public class CounterListPageViewModel : DisposableBase
         _model = model;
 
         CountersViewEnvelope = _model.Counters
-            .ToDisposableViewListEnvelope(
+            .ToBindableViewListEnvelope(
                 model => new CounterListItemViewModel(model, updated => _model.Counters.Update(updated, model)))
             .AddTo(Disposable);
 

@@ -5,7 +5,7 @@ using R3;
 
 namespace HelloAvalonia.Features.CounterList.ViewModels;
 
-public class CounterListItemViewModel : DisposableBase
+public class CounterListItemViewModel : BindableBase
 {
     private readonly CounterListItem _model;
 

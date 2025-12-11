@@ -3,7 +3,7 @@ using R3;
 
 namespace HelloAvalonia.Framework.Abstractions;
 
-public abstract class DisposableBase : IDisposable
+public abstract class BindableBase : IDisposable
 {
     private bool _disposed = false;
     protected CompositeDisposable Disposable { get; } = [];

@@ -3,7 +3,7 @@ using ObservableCollections;
 
 namespace HelloAvalonia.Features.CounterList.Models;
 
-public class CounterListModel : DisposableBase
+public class CounterListModel : BindableBase
 {
     public ObservableList<CounterListItem> Counters { get; }
 

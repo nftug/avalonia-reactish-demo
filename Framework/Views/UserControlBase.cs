@@ -6,7 +6,7 @@ using R3;
 namespace HelloAvalonia.Framework.Views;
 
 public abstract class UserControlBase<TViewModel> : UserControl
-    where TViewModel : DisposableBase
+    where TViewModel : BindableBase
 {
     private bool _isAttached;
     private TViewModel? _viewModel;

@@ -4,7 +4,7 @@ using HelloAvalonia.UI.Navigation.ViewModels;
 
 namespace HelloAvalonia.Shell.ViewModels;
 
-public class MainWindowViewModel : DisposableBase
+public class MainWindowViewModel : BindableBase
 {
     public NavigationViewModel NavigationViewModel { get; }
 
