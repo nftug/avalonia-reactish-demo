@@ -8,58 +8,63 @@ namespace HelloAvalonia.Features.CounterList.ViewModels;
 
 public class CounterListPageViewModel : BindableBase
 {
-    private readonly CounterListModel _model;
+    private readonly CounterListModel _listModel;
 
     public BindableViewListEnvelope<CounterListItem, CounterListItemViewModel> CountersViewEnvelope { get; }
     public IReadOnlyBindableReactiveProperty<int> CountersSum { get; }
+
     public ReactiveCommand<Unit> AddCommand { get; }
     public ReactiveCommand<Unit> RemoveCommand { get; }
     public ReactiveCommand<Unit> SortAscendingCommand { get; }
 
     public CounterListPageViewModel(CounterListModel model)
     {
-        _model = model;
+        _listModel = model;
 
-        CountersViewEnvelope = _model.Counters
-            .ToBindableViewListEnvelope(
-                model => new CounterListItemViewModel(model, updated => _model.Counters.Update(updated, model)))
+        CountersViewEnvelope = _listModel.Counters
+            .ToBindableViewListEnvelope<CounterListItem, CounterListItemViewModel>(
+                model => new(model, updated => _listModel.Counters.Update(updated, model)))
             .AddTo(Disposable);
 
-        CountersSum = _model.Counters
+        CountersSum = _listModel.Counters
             .ObserveChangedWithPrepend()
-            .Select(_ => _model.Counters.Sum(c => c.Value))
+            .Select(_ => _listModel.Counters.Sum(c => c.Value))
             .ToReadOnlyBindableReactiveProperty()
             .AddTo(Disposable);
 
-        var countersCount = _model.Counters.ObserveCountChanged(notifyCurrentCount: true);
+        var countersCount = _listModel.Counters.ObserveCountChanged(notifyCurrentCount: true);
 
         AddCommand = new ReactiveCommand()
             .WithSubscribe(_ => HandleAddCounter(), Disposable);
 
-        RemoveCommand = countersCount.Select(count => count > 0).ToReactiveCommand()
+        RemoveCommand = countersCount
+            .Select(count => count > 0)
+            .ToReactiveCommand()
             .WithSubscribe(_ => HandleRemoveCounter(), Disposable);
 
-        SortAscendingCommand = countersCount.Select(count => count > 1).ToReactiveCommand()
-            .WithSubscribe(_ => HandleSortCounters(), Disposable);
+        SortAscendingCommand = countersCount
+            .Select(count => count > 1)
+            .ToReactiveCommand()
+            .WithSubscribe(_ => HandleSortAscending(), Disposable);
     }
 
     private void HandleAddCounter()
     {
-        var nextValue = _model.Counters.Count > 0 ? _model.Counters[^1].Value + 1 : 0;
-        _model.Counters.Add(CounterListItem.CreateNew(nextValue));
+        var nextValue = _listModel.Counters.Count > 0 ? _listModel.Counters[^1].Value + 1 : 0;
+        _listModel.Counters.Add(CounterListItem.CreateNew(nextValue));
     }
 
     private void HandleRemoveCounter()
     {
-        if (_model.Counters.Count > 0)
+        if (_listModel.Counters.Count > 0)
         {
-            var index = _model.Counters.Count - 1;
-            _model.Counters.RemoveAt(index);
+            var index = _listModel.Counters.Count - 1;
+            _listModel.Counters.RemoveAt(index);
         }
     }
 
-    private void HandleSortCounters()
+    private void HandleSortAscending()
     {
-        _model.Counters.Sort(new CounterListItemComparer());
+        _listModel.Counters.Sort(new CounterListItemComparer());
     }
 }
