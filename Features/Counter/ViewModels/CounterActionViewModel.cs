@@ -12,9 +12,11 @@ public class CounterActionViewModel : BindableBase
     private readonly IDialogService _dialogService;
 
     public IReadOnlyBindableReactiveProperty<bool> IsLoading { get; }
+    public BindableReactiveProperty<int> InputCount { get; }
 
     public ReactiveCommand<Unit> IncrementCommand { get; }
     public ReactiveCommand<Unit> DecrementCommand { get; }
+    public ReactiveCommand<Unit> SetCountCommand { get; }
     public ReactiveCommand<Unit> ResetCommand { get; }
 
     public CounterActionViewModel(CounterModel model, IDialogService dialogService)
@@ -23,6 +25,9 @@ public class CounterActionViewModel : BindableBase
         _dialogService = dialogService;
 
         IsLoading = _model.IsLoading.ToReadOnlyBindableReactiveProperty().AddTo(Disposable);
+
+        InputCount = new BindableReactiveProperty<int>(_model.Count.CurrentValue)
+            .AddTo(Disposable);
 
         IncrementCommand = _model.IsLoading
             .CombineLatest(_model.Count, (isLoading, count) => !isLoading && count < int.MaxValue)
@@ -33,6 +38,12 @@ public class CounterActionViewModel : BindableBase
             .CombineLatest(_model.Count, (isLoading, count) => !isLoading && count > 0)
             .ToReactiveCommand()
             .WithSubscribeAwait(async (_, _) => await HandleDecrementAsync(), Disposable);
+
+        SetCountCommand = _model.IsLoading
+            .CombineLatest(InputCount, _model.Count,
+                (isLoading, input, current) => !isLoading && input != current)
+            .ToReactiveCommand()
+            .WithSubscribeAwait(async (_, _) => await HandleSetCountAsync(), Disposable);
 
         ResetCommand = _model.IsLoading
             .CombineLatest(_model.Count, (isLoading, count) => !isLoading && count != 0)
@@ -50,6 +61,11 @@ public class CounterActionViewModel : BindableBase
     {
         var current = _model.Count.CurrentValue;
         return _model.SetCountAsync(current - 1, TimeSpan.FromMilliseconds(100));
+    }
+
+    private Task HandleSetCountAsync()
+    {
+        return _model.SetCountAsync(InputCount.CurrentValue, TimeSpan.FromMilliseconds(500));
     }
 
     private async Task HandleResetAsync()

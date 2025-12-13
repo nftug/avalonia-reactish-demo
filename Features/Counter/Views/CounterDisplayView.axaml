@@ -6,8 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
              x:Class="HelloAvalonia.Features.Counter.Views.CounterDisplayView"
              x:DataType="vm:CounterDisplayViewModel">
-
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="25">
+    <StackPanel Spacing="25">
         <TextBlock Text="{Binding Count.Value, StringFormat='Current Count: {0}'}"
                    HorizontalAlignment="Center"
                    FontSize="32" />
@@ -16,5 +15,4 @@
                    HorizontalAlignment="Center"
                    FontSize="20" />
     </StackPanel>
-
 </UserControl>
