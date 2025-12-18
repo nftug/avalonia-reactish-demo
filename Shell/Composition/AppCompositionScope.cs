@@ -8,6 +8,8 @@ internal sealed class AppCompositionScope(AppContainer root) : ICompositionScope
 
     public T Resolve<T>() => _container.Resolve<T>();
 
+    public ICompositionScope CreateScope() => new AppCompositionScope(_container);
+
     public void Dispose() => _container.Dispose();
 }
 
